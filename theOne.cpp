@@ -22,12 +22,12 @@ struct SearchNode
     SearchNode(Book b) : book(b), left(nullptr), right(nullptr) {}
 };
 
-struct enqNode
+struct BorrowQueNode
 {
     string data;   // String data
-    enqNode *next; // Pointer to the next node
+    BorrowQueNode *next; // Pointer to the next node
 };
-enqNode *start = NULL;
+BorrowQueNode *start = NULL;
 
 // Function to add a book to the binary search tree (BST)
 SearchNode *addBookToBST(SearchNode *node, const Book &book)
@@ -118,9 +118,9 @@ string searchBookInGenre(SearchNode *genreRoot)
         return "";
     }
 }
-void enqueue(string book)
+void BorrowEnque(string book)
 {
-    enqNode *q = new enqNode;
+    BorrowQueNode *q = new BorrowQueNode;
     q->data = book;
     q->next = NULL;
 
@@ -130,7 +130,7 @@ void enqueue(string book)
     }
     else
     {
-        enqNode *temp = start;
+        BorrowQueNode *temp = start;
         while (temp->next != NULL)
         {
             temp = temp->next;
@@ -138,14 +138,14 @@ void enqueue(string book)
         temp->next = q;
     }
 }
-void dequeue(enqNode*& start,string book){
+void ReturnDeque(BorrowQueNode*& start,string book){
     if (!start) {
         cout << "Queue is empty!" << endl;
         return;
     }
 
-    enqNode* q = start;
-    enqNode* prev = nullptr;
+    BorrowQueNode* q = start;
+    BorrowQueNode* prev = nullptr;
 
     // Traverse the queue to find the target string
     while (q != nullptr && q->data != book) {
@@ -228,7 +228,7 @@ void menu()
                     cin >> ch;
                     if (ch == 'Y' || ch == 'y')
                     {
-                        enqueue(book);
+                        BorrowEnque(book);
                         cout << "successfuly borrowed." << endl;
                         break;
                     }
@@ -246,7 +246,7 @@ void menu()
                 string bok; 
                 cout << "enter the book you want to return: ";
                 cin >> bok;
-                dequeue(start,bok);
+                ReturnDeque(start,bok);
             }
             else
             {
@@ -288,7 +288,7 @@ void menu()
                     cin >> ch;
                     if (ch == 'Y' || ch == 'y')
                     {
-                        enqueue(book);
+                        BorrowEnque(book);
                         cout << "successfuly borrowed." << endl;
                         break;
                     }
@@ -306,7 +306,7 @@ void menu()
                 string bok; 
                 cout << "enter the book you want to return: ";
                 cin >> bok;
-                dequeue(start,bok);
+                ReturnDeque(start,bok);
             }
             else
             {
@@ -348,7 +348,7 @@ void menu()
                     cin >> ch;
                     if (ch == 'Y' || ch == 'y')
                     {
-                        enqueue(book);
+                        BorrowEnque(book);
                         cout << "successfuly borrowed." << endl;
                         break;
                     }
@@ -366,7 +366,7 @@ void menu()
                 string bok; 
                 cout << "enter the book you want to return: ";
                 cin >> bok;
-                dequeue(start,bok);
+                ReturnDeque(start,bok);
             }
             else
             {
