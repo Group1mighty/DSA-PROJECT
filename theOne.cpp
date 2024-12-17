@@ -245,7 +245,7 @@ void menu()
             else if(actionChoice==3){
                 string bok; 
                 cout << "enter the book you want to return: ";
-                cin >> bok;
+                getline(cin, bok);
                 ReturnDeque(start,bok);
             }
             else
@@ -305,7 +305,7 @@ void menu()
             else if(actionChoice==3){
                 string bok; 
                 cout << "enter the book you want to return: ";
-                cin >> bok;
+                getline(cin, bok);
                 ReturnDeque(start,bok);
             }
             else
@@ -365,7 +365,7 @@ void menu()
             else if(actionChoice==3){
                 string bok; 
                 cout << "enter the book you want to return: ";
-                cin >> bok;
+                getline(cin, bok);
                 ReturnDeque(start,bok);
             }
             else
