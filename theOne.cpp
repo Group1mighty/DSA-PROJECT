@@ -29,6 +29,14 @@ struct BorrowQueNode
 };
 BorrowQueNode *start = NULL;
 
+struct stackPtr
+{
+    string data;
+    stackPtr *next;
+   
+};
+stackPtr *topPtr = NULL;
+
 // Function to add a book to the binary search tree (BST)
 SearchNode *addBookToBST(SearchNode *node, const Book &book)
 {
@@ -118,6 +126,7 @@ string searchBookInGenre(SearchNode *genreRoot)
         return "";
     }
 }
+
 void BorrowEnque(string book)
 {
     BorrowQueNode *q = new BorrowQueNode;
@@ -138,6 +147,7 @@ void BorrowEnque(string book)
         temp->next = q;
     }
 }
+
 void ReturnDeque(BorrowQueNode*& start,string book){
     if (!start) {
         cout << "Queue is empty!" << endl;
@@ -155,7 +165,7 @@ void ReturnDeque(BorrowQueNode*& start,string book){
 
     // If target string is not found
     if (!q) {
-        cout << "String not found in the queue." << endl;
+        cout << "BOOK not found in the queue." << endl;
         return;
     }
 
@@ -171,6 +181,29 @@ void ReturnDeque(BorrowQueNode*& start,string book){
     cout << " The book " << book << " has been returned successfully." << endl;
 }
 
+void pushL(string k){
+   stackPtr *newNode = new stackPtr;
+   newNode->data=k;
+   newNode->next = topPtr;
+   topPtr=newNode;
+}
+
+void displayL(stackPtr *q){
+    if (q == NULL)
+        return;
+    displayL(q->next);
+    cout << q->data<< ", ";
+}
+
+// Clear the stack
+void clear() {
+        while (topPtr != nullptr) {
+            stackPtr* temp = topPtr;
+            topPtr = topPtr->next;
+            delete temp;  // Delete the current node
+        }
+        cout << "History cleared successfully.\n";
+    }
 // Function to display the menu and process user input
 void menu()
 {
@@ -201,6 +234,7 @@ void menu()
             cout << "1. Add Books to Science Fiction(admin only)" << endl;
             cout << "2. Search And Borrow Books in Science Fiction" << endl;
             cout << "3. Return book." << endl;
+            cout << "4. Transaction  History. " << endl;
             cout << "Enter your choice: ";
             cin >> actionChoice;
             cin.ignore(); // to clear the newline character from the buffer
@@ -229,6 +263,7 @@ void menu()
                     if (ch == 'Y' || ch == 'y')
                     {
                         BorrowEnque(book);
+                        pushL(book);
                         cout << "successfuly borrowed." << endl;
                         break;
                     }
@@ -248,6 +283,21 @@ void menu()
                 getline(cin, bok);
                 ReturnDeque(start,bok);
             }
+             else if(actionChoice==4){
+                int i;
+                cout << "1.View Transaction History" << endl;
+                cout << "2. Clear History" << endl;
+                cout << "enter choise: ";
+                cin >> i;
+                if(i==1){
+                    cout << "Your Transaction History is: ";
+                    displayL(topPtr);
+                    cout << endl;
+                }
+                else if(i==2){
+                    clear();
+                }
+            }
             else
             {
                 cout << "Invalid choice." << endl;
@@ -261,6 +311,7 @@ void menu()
             cout << "1. Add Books to Fantasy(admin only)" << endl;
             cout << "2. Search And Borrow Books in Fantasy" << endl;
             cout << "3. Return book." << endl;
+            cout << "4. Transaction  History. " << endl;
             cout << "Enter your choice: ";
             cin >> actionChoice;
             cin.ignore(); // to clear the newline character from the buffer
@@ -289,6 +340,7 @@ void menu()
                     if (ch == 'Y' || ch == 'y')
                     {
                         BorrowEnque(book);
+                        pushL(book);
                         cout << "successfuly borrowed." << endl;
                         break;
                     }
@@ -308,6 +360,21 @@ void menu()
                 getline(cin, bok);
                 ReturnDeque(start,bok);
             }
+             else if(actionChoice==4){
+                int i;
+                cout << "1.View Transaction History" << endl;
+                cout << "2. Clear History" << endl;
+                cout << "enter choise: ";
+                cin >> i;
+                if(i==1){
+                    cout << "Your Transaction History is: ";
+                    displayL(topPtr);
+                    cout << endl;
+                }
+                else if(i==2){
+                    clear();
+                }
+            }
             else
             {
                 cout << "Invalid choice." << endl;
@@ -321,6 +388,7 @@ void menu()
             cout << "1. Add Books to Mystery(admin only)" << endl;
             cout << "2. Search And Borrow Books in Mystery" << endl;
             cout << "3. Return book." << endl;
+            cout << "4. Transaction  History. " << endl;
             cout << "Enter your choice: ";
             cin >> actionChoice;
             cin.ignore(); // to clear the newline character from the buffer
@@ -349,6 +417,7 @@ void menu()
                     if (ch == 'Y' || ch == 'y')
                     {
                         BorrowEnque(book);
+                        pushL(book);
                         cout << "successfuly borrowed." << endl;
                         break;
                     }
@@ -367,6 +436,21 @@ void menu()
                 cout << "enter the book you want to return: ";
                 getline(cin, bok);
                 ReturnDeque(start,bok);
+            }
+             else if(actionChoice==4){
+                int i;
+                cout << "1.View Transaction History" << endl;
+                cout << "2. Clear History" << endl;
+                cout << "enter choise: ";
+                cin >> i;
+                if(i==1){
+                    cout << "Your Transaction History is: ";
+                    displayL(topPtr);
+                    cout << endl;
+                }
+                else if(i==2){
+                    clear();
+                }
             }
             else
             {
